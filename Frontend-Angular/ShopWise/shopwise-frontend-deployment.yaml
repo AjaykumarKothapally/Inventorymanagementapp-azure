@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: shopwise-app
+  labels:
+    app: shopwise-app
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: shopwise-app
+  template:
+    metadata:
+      labels:
+        app: shopwise-app
+    spec:
+      containers:
+        - name: shopwise-app
+          image: 905418476815.dkr.ecr.ap-south-1.amazonaws.com/mytest:shopwise-frontend-latest
+          ports:
+            - containerPort: 80

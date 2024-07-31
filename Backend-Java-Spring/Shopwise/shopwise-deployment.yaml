@@ -1,0 +1,39 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: backend-shopwise-app
+  labels:
+    app: backend-shopwise-app
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: backend-shopwise-app
+  template:
+    metadata:
+      labels:
+        app: backend-shopwise-app
+    spec:
+      containers:
+        - name: backend-shopwise-app
+          image: 905418476815.dkr.ecr.ap-south-1.amazonaws.com/mytest:shopwise-backend-latest
+          ports:
+            - containerPort: 9091
+          env:
+            - name: AWS_REGION
+              value: "ap-south-1"
+            - name: AWS_ACCESS_KEY_ID
+              valueFrom:
+                secretKeyRef:
+                  name: aws-secrets
+                  key: AWS_ACCESS_KEY_ID
+            - name: AWS_SECRET_ACCESS_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: aws-secrets
+                  key: AWS_SECRET_ACCESS_KEY
+            - name: AWS_SESSION_TOKEN
+              valueFrom:
+                secretKeyRef:
+                  name: aws-secrets
+                  key: AWS_SESSION_TOKEN

@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: shopclues-app
+  labels:
+    app: shopclues-app
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: shopclues-app
+  template:
+    metadata:
+      labels:
+        app: shopclues-app
+    spec:
+      containers:
+        - name: shopclues-app
+          image: 905418476815.dkr.ecr.ap-south-1.amazonaws.com/mytest:shopclues-frontend-latest
+          ports:
+            - containerPort: 80

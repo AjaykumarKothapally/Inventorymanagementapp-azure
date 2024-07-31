@@ -1,0 +1,20 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: shopclues-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: shopclues
+  template:
+    metadata:
+      labels:
+        app: shopclues
+    spec:
+      containers:
+      - name: shopclues
+        image: myazureacrdemo.azurecr.io/my-azure-shopclues:latest
+        ports:
+        - containerPort: 80
+
