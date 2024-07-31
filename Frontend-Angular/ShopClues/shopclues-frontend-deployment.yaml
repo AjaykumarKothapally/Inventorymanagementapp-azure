@@ -16,6 +16,6 @@ spec:
     spec:
       containers:
         - name: shopclues-app
-          image: 905418476815.dkr.ecr.ap-south-1.amazonaws.com/mytest:shopclues-frontend-latest
+          image: myazureacr.azurecr.io/shopclues-frontend:latest
           ports:
             - containerPort: 80

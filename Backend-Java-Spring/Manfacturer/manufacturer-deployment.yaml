@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
         - name: backend-manfacturer-app
-          image: 905418476815.dkr.ecr.ap-south-1.amazonaws.com/mytest:manufacturer-backend-latest
+          image: myazureacr.azurecr.io/my-manufacturer-service:latest
           ports:
             - containerPort: 9090
           env:

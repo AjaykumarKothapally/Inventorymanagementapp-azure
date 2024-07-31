@@ -16,6 +16,6 @@ spec:
     spec:
       containers:
         - name: shopwise-app
-          image: 905418476815.dkr.ecr.ap-south-1.amazonaws.com/mytest:shopwise-frontend-latest
+          image: myazureacr.azurecr.io/shopwise-frontend:latest
           ports:
             - containerPort: 80

@@ -2,11 +2,13 @@ apiVersion: v1
 kind: Service
 metadata:
   name: backend-shopwise-app-service
+  annotations:
+    service.beta.kubernetes.io/azure-load-balancer-resource-group: my-azure-ecomm
 spec:
+  type: LoadBalancer
   selector:
-    app: backend-shopwise-app
+    app: shopwise
   ports:
     - protocol: TCP
       port: 9091
       targetPort: 9091
-  type: LoadBalancer
