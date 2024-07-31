@@ -3,7 +3,7 @@ kind: Service
 metadata:
   name: shopwise-app-service
   annotations:
-    service.beta.kubernetes.io/azure-load-balancer-resource-group: my-azure-ecomm
+    service.beta.kubernetes.io/azure-load-balancer-resource-group: my-ecomm-azure
 spec:
   type: LoadBalancer
   selector:
@@ -12,4 +12,3 @@ spec:
     - protocol: TCP
       port: 80
       targetPort: 80
-c

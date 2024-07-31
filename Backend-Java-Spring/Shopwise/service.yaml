@@ -3,7 +3,7 @@ kind: Service
 metadata:
   name: backend-shopwise-app-service
   annotations:
-    service.beta.kubernetes.io/azure-load-balancer-resource-group: my-azure-ecomm
+    service.beta.kubernetes.io/azure-load-balancer-resource-group: my-ecomm-azure
 spec:
   type: LoadBalancer
   selector:
