@@ -43,7 +43,7 @@ jobs:
           AZURE_ACR_PASSWORD: ${{ secrets.AZURE_ACR_PASSWORD }}
         run: |
           # ShopClues Microservice
-          cd ../ShopClues
+          cd Backend-Java-Spring/ShopClues
           docker build -t shopclues-backend .
           docker tag shopclues-backend:latest $AZURE_ACR_LOGIN_SERVER/shopclues-backend:latest
 
