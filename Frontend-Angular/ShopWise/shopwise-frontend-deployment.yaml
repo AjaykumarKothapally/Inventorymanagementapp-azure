@@ -16,6 +16,6 @@ spec:
     spec:
       containers:
         - name: shopwise-app
-          image: myazureacr.azurecr.io/shopwise-frontend:latest
+          image: myazureacrdemo.azurecr.io/shopwise-frontend:latest
           ports:
             - containerPort: 80

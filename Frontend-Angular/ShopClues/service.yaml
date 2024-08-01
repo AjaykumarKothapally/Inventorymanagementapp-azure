@@ -3,11 +3,11 @@ kind: Service
 metadata:
   name: shopclues-app-service
   annotations:
-    service.beta.kubernetes.io/azure-load-balancer-resource-group: my-ecomm-azure
+    service.beta.kubernetes.io/azure-load-balancer-resource-group: ecomm-azure-resourcegroup
 spec:
   type: LoadBalancer
   selector:
-    app: shopclues-frontend
+    app: shopclues-app
   ports:
     - protocol: TCP
       port: 80

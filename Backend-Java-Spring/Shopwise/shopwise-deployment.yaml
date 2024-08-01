@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
         - name: backend-shopwise-app
-          image: myazureacr.azurecr.io/my-shopwise-service:latest
+          image: myazureacrdemo.azurecr.io/my-shopwise-service:latest
           ports:
             - containerPort: 9091
           env:

@@ -1,7 +1,6 @@
 # Use OpenJDK 17 as the base image
 FROM openjdk:17-jdk-alpine
 
-
 # Install necessary dependencies including AWS CLI
 RUN apk update && \
     apk add --no-cache python3 py3-pip && \
@@ -13,7 +12,7 @@ RUN apk update && \
 WORKDIR /app
 
 # Copy the packaged JAR file into the container
-COPY target/Schedular-0.0.1-SNAPSHOT.jar /app/app.jar
+COPY target/*.jar /app/app.jar
 
 # Expose the port that your Spring Boot application uses
 EXPOSE 9091

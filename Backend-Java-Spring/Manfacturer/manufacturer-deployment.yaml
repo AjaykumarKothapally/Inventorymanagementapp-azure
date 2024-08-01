@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
         - name: backend-manfacturer-app
-          image: myazureacr.azurecr.io/my-manufacturer-service:latest
+          image: myazureacrdemo.azurecr.io/my-manufacturer-service:latest
           ports:
             - containerPort: 9090
           env:

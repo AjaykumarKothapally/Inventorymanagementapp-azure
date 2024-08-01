@@ -12,7 +12,7 @@ RUN apk update && \
 WORKDIR /app
 
 # Copy the packaged JAR file into the container
-COPY target/Manfacturer-0.0.1-SNAPSHOT.jar /app/app.jar
+COPY target/*.jar /app/app.jar
 
 # Expose the port that your Spring Boot application uses
 EXPOSE 8080
