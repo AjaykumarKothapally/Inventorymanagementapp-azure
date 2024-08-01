@@ -1,52 +1,82 @@
-name: Deploy to AKS
+name: CI/CD Pipeline
 
 on:
   push:
     branches:
-      - main  # Trigger on pushes to the main branch
+      - main
 
 jobs:
-  build-and-deploy:
+  deploy:
     runs-on: ubuntu-latest
     steps:
-      # Step 1: Checkout the repository
-      - name: Checkout code
-        uses: actions/checkout@v3
+      - name: Checkout repository
+        uses: actions/checkout@v2
 
-      # Step 2: Set up Docker
-      - name: Set up Docker Buildx
-        uses: docker/setup-buildx-action@v2
-
-      # Step 3: Log in to Azure Container Registry (if used)
-      - name: Log in to Azure Container Registry
-        uses: azure/docker-login@v1
+      - name: Set up JDK 17
+        uses: actions/setup-java@v2
         with:
-          login-server: ${{ secrets.AZURE_ACR_LOGIN_SERVER }}
-          username: ${{ secrets.AZURE_ACR_USERNAME }}
-          password: ${{ secrets.AZURE_ACR_PASSWORD }}
+          java-version: "17"
+          distribution: temurin
 
-      # Step 4: Build and push Docker images
-      - name: Build and push Docker image
+      - name: Validate directory structure
         run: |
-          docker build -t ${{ secrets.AZURE_ACR_LOGIN_SERVER }}/myapp:latest .
-          docker push ${{ secrets.AZURE_ACR_LOGIN_SERVER }}/myapp:latest
+          echo "Validating directory structure..."
+          ls -la
+          ls -la Backend-Java-Spring
+          ls -la Frontend-Angular
 
-      # Step 5: Set up Azure CLI
-      - name: Set up Azure CLI
-        uses: azure/setup-azure-cli@v1
+      - name: Build ShopClues Microservice
+        run: |
+          cd Backend-Java-Spring/ShopClues
+          ./mvnw clean package
 
-      # Step 6: Log in to Azure CLI
-      - name: Log in to Azure CLI
+      - name: Build ShopClues Frontend Application
+        run: |
+          cd Frontend-Angular/ShopClues
+          npm install
+          npm run build
+
+      - name: Build Docker Images and Push to ACR
+        env:
+          AZURE_ACR_LOGIN_SERVER: ${{ secrets.AZURE_ACR_LOGIN_SERVER }}
+          AZURE_ACR_USERNAME: ${{ secrets.AZURE_ACR_USERNAME }}
+          AZURE_ACR_PASSWORD: ${{ secrets.AZURE_ACR_PASSWORD }}
+        run: |
+          # ShopClues Microservice
+          cd ../ShopClues
+          docker build -t shopclues-backend .
+          docker tag shopclues-backend:latest $AZURE_ACR_LOGIN_SERVER/shopclues-backend:latest
+
+          # ShopClues Frontend
+          cd ../../Frontend-Angular/ShopClues
+          docker build -t shopclues-frontend .
+          docker tag shopclues-frontend:latest $AZURE_ACR_LOGIN_SERVER/shopclues-frontend:latest
+
+
+          # Login to ACR
+          echo $AZURE_ACR_PASSWORD | docker login $AZURE_ACR_LOGIN_SERVER -u $AZURE_ACR_USERNAME --password-stdin
+
+          # Push Docker Images
+          docker push $AZURE_ACR_LOGIN_SERVER/shopclues-backend:latest
+          docker push $AZURE_ACR_LOGIN_SERVER/shopclues-frontend:latest
+
+      - name: Azure Login
         uses: azure/login@v1
         with:
           creds: ${{ secrets.AZURE_CREDENTIALS }}
 
-      # Step 7: Get AKS credentials
-      - name: Get AKS credentials
-        run: az aks get-credentials --resource-group myResourceGroup --name myAKSCluster
-
-      # Step 8: Deploy to AKS
-      - name: Deploy to AKS
+      - name: Set up kubectl
         run: |
-          kubectl apply -f k8s/deployment.yaml
-          kubectl apply -f k8s/service.yaml
+          az aks get-credentials --resource-group ecomm-azure-resourcegroup --name ecomm-azure-aks-cluster
+
+      - name: Deploy to AKS Cluster
+        run: |
+          # Apply Kubernetes deployment and service files for ShopClues Microservice
+          cd Backend-Java-Spring/ShopClues
+          kubectl apply -f shopclues-deployment.yaml
+          kubectl apply -f service.yaml
+
+          # Apply Kubernetes deployment and service files for ShopClues Frontend
+          cd ../../Frontend-Angular/ShopClues
+          kubectl apply -f shopclues-frontend-deployment.yaml
+          kubectl apply -f service.yaml
