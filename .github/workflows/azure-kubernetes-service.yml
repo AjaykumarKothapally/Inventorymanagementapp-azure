@@ -28,7 +28,7 @@ jobs:
       - name: Build ShopClues Microservice
         run: |
           cd Backend-Java-Spring/ShopClues
-          ./mvnw clean package
+          mvn clean package
 
       - name: Build ShopClues Frontend Application
         run: |
