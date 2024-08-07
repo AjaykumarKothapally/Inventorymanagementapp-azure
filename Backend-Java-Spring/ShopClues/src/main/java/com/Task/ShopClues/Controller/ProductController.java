@@ -19,7 +19,7 @@ import com.Task.ShopClues.Entity.Products;
 import com.Task.ShopClues.Repository.ShopCluesProductRepository;
 
 @RestController
-@CrossOrigin(origins = "http://13.71.95.173")
+@CrossOrigin(origins = "http://www.ecomcloudconnect.com")
 @RequestMapping("/products")
 public class ProductController {
 
