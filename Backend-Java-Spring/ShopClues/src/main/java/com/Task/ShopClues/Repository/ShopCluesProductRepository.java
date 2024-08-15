@@ -1,14 +1,12 @@
 package com.Task.ShopClues.Repository;
 
-import java.util.Optional;
 import com.Task.ShopClues.Entity.Products;
-import org.socialsignin.spring.data.dynamodb.repository.EnableScan;
-import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
+import com.azure.spring.data.cosmos.repository.CosmosRepository;
+
+import java.util.Optional;
 
 @Repository
-@EnableScan
-public interface ShopCluesProductRepository extends CrudRepository<Products, String> {
-
+public interface ShopCluesProductRepository extends CosmosRepository<Products, String> {
 	Optional<Products> findByProductId(Long productId);
 }

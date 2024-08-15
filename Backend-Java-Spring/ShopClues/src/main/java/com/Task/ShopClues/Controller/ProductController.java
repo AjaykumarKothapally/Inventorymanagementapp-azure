@@ -2,6 +2,8 @@ package com.Task.ShopClues.Controller;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
+import java.util.stream.StreamSupport;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -29,7 +31,8 @@ public class ProductController {
 	@SuppressWarnings("deprecation")
 	@GetMapping("/all")
 	public ResponseEntity<?> getAllProducts() {
-		List<Products> products = (List<Products>) productRepository.findAll();
+		List<Products> products = StreamSupport.stream(productRepository.findAll().spliterator(), false)
+				.collect(Collectors.toList());
 		if (products.isEmpty()) {
 			int statusCode = ResponseEntity.status(HttpStatus.NOT_FOUND).build().getStatusCodeValue();
 			return ResponseEntity.status(statusCode).body(statusCode);
@@ -37,15 +40,15 @@ public class ProductController {
 		return ResponseEntity.ok(products);
 	}
 
-	@SuppressWarnings("deprecation")
 	@PostMapping("/add")
 	public ResponseEntity<?> addingProducts(@RequestBody List<Products> products) {
-		// Iterate over the list and save each product
-		for (Products product : products) {
-			productRepository.save(product);
+		try {
+			productRepository.saveAll(products);
+			return ResponseEntity.status(HttpStatus.CREATED).body("Products added successfully");
+		} catch (Exception e) {
+			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+					.body("An error occurred while saving products");
 		}
-		int statusCode = ResponseEntity.status(HttpStatus.CREATED).build().getStatusCodeValue();
-		return ResponseEntity.status(statusCode).body(statusCode);
 	}
 
 	@PutMapping("/{id}")

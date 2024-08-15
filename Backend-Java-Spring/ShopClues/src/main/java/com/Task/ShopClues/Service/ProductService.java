@@ -3,15 +3,11 @@ package com.Task.ShopClues.Service;
 import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBMapper;
 import com.Task.ShopClues.Entity.Products;
 import com.Task.ShopClues.Repository.ShopCluesProductRepository;
 
 @Service
 public class ProductService {
-
-	@Autowired
-	private DynamoDBMapper dynamoDBMapper;
 
 	@Autowired
 	private ShopCluesProductRepository productRepository;
@@ -24,7 +20,7 @@ public class ProductService {
 
 			if (updatedQuantity >= 0) {
 				product.setProductQty(updatedQuantity);
-				dynamoDBMapper.save(product);
+				productRepository.save(product);
 			} else {
 				throw new RuntimeException("Insufficient quantity for product: " + product.getProductName());
 			}

@@ -9,5 +9,7 @@
         "resourcegroup",
         "shopclues",
         "shopwise"
-    ]
+    ],
+    "java.configuration.updateBuildConfiguration": "interactive",
+    "java.compile.nullAnalysis.mode": "automatic"
 }
