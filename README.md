@@ -11,5 +11,5 @@ kubectl create secret generic cosmosdb-secrets \
  --from-literal=key="tHd5gEAZOyGtwhygEr2agd0UsR2f0u24cgfWcRO7z2JDwGCy1grSl3AawFyj0cFfIv1DFwRlZiyAACDbBAMy2Q==" \
  --from-literal=databaseName="ShopCluesDB"
 
-create a new secrets using kubectl generic --from-literal
+create a new secrets using kubectl generic --from-
 kubectl rollout restart deployment/backend-shopclues-app
