@@ -44,21 +44,21 @@ jobs:
         run: |
           # ShopClues Microservice
           cd Backend-Java-Spring/ShopClues
-          docker build -t shopclues-backend .
-          docker tag shopclues-backend:latest $AZURE_ACR_LOGIN_SERVER/shopclues-backend:latest
+          docker build --no-cache -t shopclues-backend .
+          docker tag shopclues-backend:latest $AZURE_ACR_LOGIN_SERVER/shopclues-backend-service:latest
 
           # ShopClues Frontend
           cd ../../Frontend-Angular/ShopClues
-          docker build -t shopclues-frontend .
-          docker tag shopclues-frontend:latest $AZURE_ACR_LOGIN_SERVER/shopclues-frontend:latest
+          docker build --no-cache -t shopclues-frontend .
+          docker tag shopclues-frontend:latest $AZURE_ACR_LOGIN_SERVER/shopclues-frontend-service:latest
 
 
           # Login to ACR
           echo $AZURE_ACR_PASSWORD | docker login $AZURE_ACR_LOGIN_SERVER -u $AZURE_ACR_USERNAME --password-stdin
 
           # Push Docker Images
-          docker push $AZURE_ACR_LOGIN_SERVER/shopclues-backend:latest
-          docker push $AZURE_ACR_LOGIN_SERVER/shopclues-frontend:latest
+          docker push $AZURE_ACR_LOGIN_SERVER/shopclues-backend-service:latest
+          docker push $AZURE_ACR_LOGIN_SERVER/shopclues-frontend-service:latest
 
       - name: Azure Login
         uses: azure/login@v1

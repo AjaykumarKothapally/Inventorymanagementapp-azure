@@ -16,6 +16,6 @@ spec:
     spec:
       containers:
         - name: backend-shopclues-app
-          image: ecommazureacr.azurecr.io/shopclues-backend:latest
+          image: ecommazureacr.azurecr.io/shopclues-backend-service:latest
           ports:
             - containerPort: 8080
