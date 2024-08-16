@@ -27,16 +27,6 @@ public class CosmosDbConfig {
 
     @Bean
     public CosmosAsyncClient cosmosAsyncClient() {
-        // Add version-checking code here
-        String version = System.getProperty("java.version");
-        if (version.contains("-")) {
-            version = version.split("-")[0];
-        }
-        int javaVersion = Integer.parseInt(version);
-
-        // Use the parsed version if needed or simply log it
-        System.out.println("Java Version: " + javaVersion);
-
         return new CosmosClientBuilder()
                 .endpoint(endpoint)
                 .key(key)

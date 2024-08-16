@@ -19,12 +19,12 @@ public class Products {
 	private Long productQty; // Quantity of the product
 	private String productSku; // SKU of the product
 	private String productName; // Name of the product
-	private Integer productPrice; // Price of the product
+	private Long productPrice; // Price of the product
 	private String productShortName; // Short name of the product
 	private String productDescription; // Description of the product
 	private String createdDate; // Date when the product was created
 	private String deliveryTimeSpan; // Delivery time span
-	private Integer categoryId; // Category ID
+	private Long categoryId; // Category ID
 	private String productImageUrl; // URL of the product image
 	private String categoryName; // Category name
 
@@ -34,8 +34,8 @@ public class Products {
 
 	// Parameterized constructor
 	public Products(String id, Long productId, Long productQty, String productSku, String productName,
-			Integer productPrice, String productShortName, String productDescription,
-			String createdDate, String deliveryTimeSpan, Integer categoryId,
+			Long productPrice, String productShortName, String productDescription,
+			String createdDate, String deliveryTimeSpan, Long categoryId,
 			String productImageUrl, String categoryName) {
 		this.id = id;
 		this.productId = productId;
@@ -93,11 +93,11 @@ public class Products {
 		this.productName = productName;
 	}
 
-	public Integer getProductPrice() {
+	public Long getProductPrice() {
 		return productPrice;
 	}
 
-	public void setProductPrice(Integer productPrice) {
+	public void setProductPrice(Long productPrice) {
 		this.productPrice = productPrice;
 	}
 
@@ -133,11 +133,11 @@ public class Products {
 		this.deliveryTimeSpan = deliveryTimeSpan;
 	}
 
-	public Integer getCategoryId() {
+	public Long getCategoryId() {
 		return categoryId;
 	}
 
-	public void setCategoryId(Integer categoryId) {
+	public void setCategoryId(Long categoryId) {
 		this.categoryId = categoryId;
 	}
 

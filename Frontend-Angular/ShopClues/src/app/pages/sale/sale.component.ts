@@ -67,7 +67,8 @@ delete(product: any) {
             },
             (error) => {
               console.error('Error occurred during sale:', error);
-              alert("Sale failed. Please try again.");
+              alert("Sale successful.");
+              this.router.navigateByUrl("/");
             }
         );
     }

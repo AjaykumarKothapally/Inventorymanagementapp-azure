@@ -17,7 +17,6 @@ export class ProductService {
   constructor(private http: HttpClient) { }
 
   getAllProducts(): Observable<any[]> {
-    debugger;
     return this.http.get<any[]>(`${this.baseUrl}/products/all`);
   }
   
