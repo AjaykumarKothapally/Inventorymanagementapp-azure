@@ -9,7 +9,7 @@ export class ProductService {
 
   private productUrl = './assets/product.json'
   private productUrl2 = './assets/prod.json'
-  private baseUrl = 'http://52.140.5.133:8080' //backendloadbalancer
+  private baseUrl = 'http://20.235.177.107:8080' //backendloadbalancer
 
 
   public cartAddedSubject = new Subject<boolean>();
