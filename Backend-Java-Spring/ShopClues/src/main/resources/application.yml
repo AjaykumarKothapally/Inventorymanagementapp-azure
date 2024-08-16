@@ -1,3 +1,6 @@
+server:
+  port: 8081
+
 cosmosdb:
   endpoint: https://shopclues-cosmosdb.documents.azure.com:443/
   key: tHd5gEAZOyGtwhygEr2agd0UsR2f0u24cgfWcRO7z2JDwGCy1grSl3AawFyj0cFfIv1DFwRlZiyAACDbBAMy2Q==

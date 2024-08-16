@@ -22,6 +22,8 @@ export class SaleComponent implements OnInit {
       this.cartService.getCartItems().subscribe((cartItems: any[]) => {
       this.cartProducts = cartItems;
       this.subTotal = this.cartProducts.reduce((total, cartItem) => total + cartItem.productPrice  * cartItem.quantity, 0 );
+      console.log('Cart Items:', this.cartProducts);
+      console.log('SubTotal:', this.subTotal);
     });
 }
  
@@ -30,6 +32,9 @@ delete(product: any) {
   if (index !== -1) {
     this.cartProducts.splice(index, 1);
     this.subTotal -= product.productPrice * product.quantity;
+    console.log('Product removed:', product);
+    console.log('Updated Cart Items:', this.cartProducts);
+    console.log('Updated SubTotal:', this.subTotal);
   }
 }
  
@@ -40,22 +45,32 @@ delete(product: any) {
 
   makeSale() {
     if (this.cartProducts.length > 0) {
-      const salePayload = {
-       cartItems: this.cartProducts.map(cartItem => {
-          return {
-            productId: cartItem.productId,
-            quantity: cartItem.quantity
-          };
-        })
-      };
-     this.productService.makeSale(salePayload ,{ responseType: 'text' }).subscribe((res: any) => {
-      console.log('Response:', res);
-        if (res.includes('Sale processed successfully')) {
-         this.cartProducts = [];
-         alert("Sale successful");
-            this.router.navigateByUrl("/");
-        }
-      });
-    } 
-  }
+        const salePayload = {
+            cartItems: this.cartProducts.map(cartItem => {
+                return {
+                    productId: cartItem.productId,
+                    quantity: cartItem.quantity
+                };
+            })
+        };
+        console.log('Sale Payload:', salePayload);
+
+        this.productService.makeSale(salePayload, { responseType: 'text' }).subscribe(
+            (res: any) => {
+                console.log('Response from server :', res);
+                if (res.includes('Sale processed successfully')) {
+                    this.cartProducts = [];
+                    this.subTotal = 0;
+                    alert("Sale successful");
+                    this.router.navigateByUrl("/");
+                }
+            },
+            (error) => {
+              console.error('Error occurred during sale:', error);
+              alert("Sale failed. Please try again.");
+            }
+        );
+    }
+}
+
 }

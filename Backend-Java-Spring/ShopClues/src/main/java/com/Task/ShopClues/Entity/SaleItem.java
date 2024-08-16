@@ -19,4 +19,13 @@ public class SaleItem {
 	public void setQuantity(Long quantity) {
 		this.quantity = quantity;
 	}
+
+	public SaleItem(Long productId, Long quantity) {
+		this.productId = productId;
+		this.quantity = quantity;
+	}
+
+	public SaleItem() {
+	}
+
 }

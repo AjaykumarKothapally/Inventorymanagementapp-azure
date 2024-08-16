@@ -22,4 +22,13 @@ public class SaleRequest {
 	public void setCartItems(List<SaleItem> cartItems) {
 		this.cartItems = cartItems;
 	}
+
+	public SaleRequest(SaleDetails saleObj, List<SaleItem> cartItems) {
+		this.saleObj = saleObj;
+		this.cartItems = cartItems;
+	}
+
+	public SaleRequest() {
+	}
+
 }

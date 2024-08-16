@@ -3,6 +3,8 @@ package com.Task.ShopClues.Controller;
 import com.Task.ShopClues.Entity.SaleItem;
 import com.Task.ShopClues.Entity.SaleRequest;
 import com.Task.ShopClues.Service.ProductService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -17,14 +19,22 @@ import org.springframework.web.bind.annotation.RestController;
 @CrossOrigin(origins = "http://www.ecomcloudconnect.com")
 public class SaleController {
 
+    private static final Logger logger = LoggerFactory.getLogger(SaleController.class);
+
     @Autowired
     private ProductService productService;
 
     @PostMapping("/makeSale")
     public ResponseEntity<String> makeSale(@RequestBody SaleRequest saleRequest) {
         try {
-            // Process the sale (save to the database, etc.)
-            // Update product quantities based on the saleRequest
+
+            logger.info("Received sale request: {}", saleRequest);
+
+            // Validate the saleRequest
+            if (saleRequest.getCartItems() == null || saleRequest.getCartItems().isEmpty()) {
+                return ResponseEntity.badRequest().body("{\"message\": \"No items in the cart\"}");
+            }
+
             for (SaleItem saleItem : saleRequest.getCartItems()) {
                 productService.updateProductQuantities(saleItem.getProductId(), saleItem.getQuantity());
             }
