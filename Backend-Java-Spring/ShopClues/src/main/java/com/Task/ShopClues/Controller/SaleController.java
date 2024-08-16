@@ -40,7 +40,6 @@ public class SaleController {
             }
             return ResponseEntity.ok().body("{\"message\": \"Sale successful\"}");
         } catch (Exception e) {
-            logger.error("Error processing sale: ", e);
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error processing sale");
         }
     }
