@@ -14,9 +14,9 @@ public class WebConfig implements WebMvcConfigurer {
             @Override
             public void addCorsMappings(@SuppressWarnings("null") CorsRegistry registry) {
                 registry.addMapping("/**")
-                        .allowedOrigins("http://www.ecomcloudconnect.com",
+                        .allowedOrigins(
                                 "http://20.235.178.160",
-                                "http://127.0.0.1:4204")
+                                "http://cloudmarket.shop")
                         .allowedMethods("GET", "POST", "PUT", "DELETE")
                         .allowedHeaders("*");
             }
