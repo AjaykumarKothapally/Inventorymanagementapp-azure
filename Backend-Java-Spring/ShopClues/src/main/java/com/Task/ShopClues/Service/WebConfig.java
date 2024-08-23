@@ -16,7 +16,7 @@ public class WebConfig implements WebMvcConfigurer {
                 registry.addMapping("/**")
                         .allowedOrigins(
                                 "http://20.235.178.160",
-                                "http://cloudmarket.shop")
+                                "https://www.cloudmarket.shop")
                         .allowedMethods("GET", "POST", "PUT", "DELETE")
                         .allowedHeaders("*");
             }
