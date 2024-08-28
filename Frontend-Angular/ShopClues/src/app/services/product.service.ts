@@ -17,7 +17,7 @@ export class ProductService {
   constructor(private http: HttpClient) { }
 
   getAllProducts(): Observable<any[]> {
-    return this.http.get<any[]>(`${this.baseUrl}/products/all`);
+    return this.http.get<any[]>(`https://app-test-nitco.azurewebsites.net/api/func-testfunc?code=p2mrxT7B91UocMjf4chtW3xjhbQTKQzFRdxsQNzDu3BrAzFuoQjJcg%3D%3D`);
   }
   
   makeSale(salePayload: any, options?: any): Observable<any> {
