@@ -2,8 +2,8 @@
   <!-- NavBar -->
   <nav class="navbar navbar-expand-lg navbar-light bg-white border-bottom border-top ">
     <div class="container">
-      <a class="navbar-brand fs-2 fw-bold " href="#"><i class="fa fa-cart-shopping fs-2"
-          style="color: blue;"></i><span class="textBlur">ShopClues</span></a>
+      <a class="navbar-brand fs-2 fw-bold " href="#"><i class="fa fa-cart-shopping fs-2" style="color: blue;"></i><span
+          class="textBlur">CloudMarket</span></a>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
         aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <!--Toggle  -->
@@ -81,7 +81,7 @@
               id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
               <i class="fa fa-cart-shopping fs-5" style="color: #202122;"></i>
               <span class="position-absolute  translate-middle badge rounded-pill bg-danger">
-               {{cartProducts.length}}
+                {{cartProducts.length}}
                 <span class="visually-hidden">unread messages</span>
               </span>
             </a>
@@ -95,9 +95,10 @@
                     Remove All
                   </div>
                 </div>
-                <div class="row pt-1" *ngFor="let cartItem of cartProducts"> 
+                <div class="row pt-1" *ngFor="let cartItem of cartProducts">
                   <div class="col-4">
-                    <img class="img-fluid" style="height: 30px;border-radius: 50%;" [src]="cartItem.productImageUrl" class="card-img-top">
+                    <img class="img-fluid" style="height: 30px;border-radius: 50%;" [src]="cartItem.productImageUrl"
+                      class="card-img-top">
                   </div>
                   <div class="col-3">
                     {{cartItem.productName}}
@@ -106,42 +107,43 @@
                     {{cartItem.quantity}}
                   </div>
                   <div class="col-2 text-end">
-                   {{ cartItem.productPrice}}
+                    {{ cartItem.productPrice}}
                   </div>
-               
-                <div class="row">
-                  <div class="col-3">
 
+                  <div class="row">
+                    <div class="col-3">
+
+                    </div>
+                    <div class="col-9">
+                      <hr>
+                    </div>
                   </div>
-                  <div class="col-9">
-                    <hr>
+
+                  <div class="row">
+                    <div class="col-2">
+
+                    </div>
+                    <div class="col-2">
+
+                    </div>
+                    <div class="col-4">
+                      <div class="Subtotal">Sub-Total</div>
+                    </div>
+                    <div class="col-4 text-end">
+                      <strong> ${{cartItem.productPrice * cartItem.quantity}}</strong>
+                    </div>
                   </div>
-                </div>
-               
-                <div class="row">
-                  <div class="col-2">
-                     
-                  </div>
-                  <div class="col-2">
-                     
-                  </div>
-                  <div class="col-4">
-                    <div class="Subtotal">Sub-Total</div>
-                  </div>
-                  <div class="col-4 text-end">
-                    <strong> ${{cartItem.productPrice * cartItem.quantity}}</strong>
-                  </div>
-                </div>
                 </div>
                 <div class="row">
                   <div class="col-12 text-end">
-                    <button class="btn btn-sm btn-success" (click)="redirectToSale()"[disabled]="cartProducts.length === 0">Checkout</button>
+                    <button class="btn btn-sm btn-success" (click)="redirectToSale()"
+                      [disabled]="cartProducts.length === 0">Checkout</button>
                   </div>
-                </div> 
+                </div>
               </div>
-            </div> 
-          </li> 
-        </ul> 
+            </div>
+          </li>
+        </ul>
       </div>
     </div>
   </nav>
